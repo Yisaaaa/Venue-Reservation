@@ -29,11 +29,17 @@ const EnqueueDialog = ({
       return;
     }
 
-    let priority;
-    if (["pwd", "senior"].includes(status) || paymentInfo === "paid") {
-      priority = 1;
-    } else {
-      priority = 0;
+    let priority = 0;
+    if (["pwd", "senior"].includes(status)) {
+      priority++;
+    }
+
+    if (paymentInfo === "paid") {
+      priority++;
+    }
+
+    if (status == "vip") {
+      priority += 2;
     }
 
     add({ name, status, paymentInfo, priority, id: customers.length + 1 });

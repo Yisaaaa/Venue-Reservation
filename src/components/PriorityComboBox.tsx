@@ -17,6 +17,10 @@ const priorities: Status[] = [
     value: "senior",
     label: "Senior",
   },
+  {
+    value: "vip",
+    label: "VIP",
+  },
 ];
 
 export function PriorityComboBox({

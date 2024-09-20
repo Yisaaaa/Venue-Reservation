@@ -17,10 +17,23 @@ const CustomerList = ({ customers }: { customers: Customer[] }) => {
       </div>
       <div className="">
         {customers.map((customer: Customer) => {
-          const style =
-            customer.priority === 1
-              ? "bg-red-200 border-2 border-red-800 text-red-800"
-              : "bg-green-200 border-2 border-green-800 text-green 800";
+          // const style =
+          //   customer.priority >= 1
+          //     ? "bg-red-200 border-2 border-red-800 text-red-800"
+          //     : "bg-green-200 border-2 border-green-800 text-green 800";
+
+          let style;
+          let prio;
+          if (customer.priority <= 1) {
+            style = "bg-green-200 border-2 border-green-800 text-green-800";
+            prio = "Low";
+          } else if (customer.priority < 3) {
+            style = "bg-orange-200 border-2 border-orange-800 text-orange-800";
+            prio = "Medium";
+          } else {
+            style = "bg-green-200 border-2 border-green-800 text-green 800";
+            prio = "High";
+          }
 
           return (
             <div
@@ -35,9 +48,7 @@ const CustomerList = ({ customers }: { customers: Customer[] }) => {
                 {capitalizeFirstLetter(customer.paymentInfo)}
               </p>
               <div className="basis-36 shrink-0">
-                <p className={`${style} w-[67%] mx-auto rounded-lg`}>
-                  {customer.priority === 0 ? "Low" : "High"}
-                </p>
+                <p className={`${style} w-[67%] mx-auto rounded-lg`}>{prio}</p>
               </div>
             </div>
           );
