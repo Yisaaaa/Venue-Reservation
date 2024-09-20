@@ -3,6 +3,17 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  color: #222;
+}
+
+#root {
+  height: 100%;
 }
