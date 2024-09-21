@@ -29,6 +29,11 @@ const EnqueueDialog = ({
       return;
     }
 
+    if (customers.length >= 3) {
+      console.log("max");
+      return;
+    }
+
     let priority = 0;
     if (["pwd", "senior"].includes(status)) {
       priority++;

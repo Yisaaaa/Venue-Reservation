@@ -31,7 +31,7 @@ const CustomerList = ({ customers }: { customers: Customer[] }) => {
             style = "bg-orange-200 border-2 border-orange-800 text-orange-800";
             prio = "Medium";
           } else {
-            style = "bg-green-200 border-2 border-green-800 text-green 800";
+            style = "bg-red-200 border-2 border-red-800 text-red-800";
             prio = "High";
           }
 
