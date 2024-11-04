@@ -1,4 +1,4 @@
-import { FaCheckCircle } from "react-icons/fa";
+import RoomCard from "@/components/RoomCard";
 
 const Reservation = () => {
   return (
@@ -36,88 +36,62 @@ const Reservation = () => {
           In One Easy Step!
         </p>
 
-        <div className="flex justify-between gap-4 px-20">
-          <div
+        <div className="grid grid-cols-3 justify-between gap-4 px-20">
+          <RoomCard
             id="meeting-room"
-            className="rounded-xl shadow-lg pb-9 overflow-hidden cursor-pointer hover:-translate-y-3 transition-all duration-200"
-          >
-            <img className="mb-4" src="/meeting_room.jpeg" alt="meeting room" />
-            <div className="px-8">
-              <p className="text-2xl mb-2 font-bold">Meeting Room</p>
-              <p className="text-base mb-8">
-                Small conference room with basic meeting amenities
-              </p>
-              <ul className="text-base flex flex-col gap-2">
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Good for{" "}
-                  <strong>5 people</strong>
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> TV Screen
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Whiteboard
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Wi-Fi
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div
-            id="meeting-room"
-            className="rounded-xl shadow-lg pb-9 overflow-hidden cursor-pointer hover:-translate-y-3 transition-all duration-200"
-          >
-            <img className="mb-4" src="/meeting_room.jpeg" alt="meeting room" />
-            <div className="px-8">
-              <p className="text-2xl mb-2 font-bold">Meeting Room</p>
-              <p className="text-base mb-8">
-                Small conference room with basic meeting amenities
-              </p>
-              <ul className="text-base flex flex-col gap-2">
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Good for{" "}
-                  <strong>5 people</strong>
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> TV Screen
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Whiteboard
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Wi-Fi
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div
-            id="meeting-room"
-            className="rounded-xl shadow-lg pb-9 overflow-hidden cursor-pointer hover:-translate-y-3 transition-all duration-200"
-          >
-            <img className="mb-4" src="/meeting_room.jpeg" alt="meeting room" />
-            <div className="px-8">
-              <p className="text-2xl mb-2 font-bold">Meeting Room</p>
-              <p className="text-base mb-8">
-                Small conference room with basic meeting amenities
-              </p>
-              <ul className="text-base flex flex-col gap-2">
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Good for{" "}
-                  <strong>5 people</strong>
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> TV Screen
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Whiteboard
-                </li>
-                <li className="flex gap-2 items-center">
-                  <FaCheckCircle className="text-dark-primary" /> Wi-Fi
-                </li>
-              </ul>
-            </div>
-          </div>
+            roomName="Meeting Room"
+            capacity={5}
+            imgSrc="/meeting_room.jpeg"
+            amenities={["TV Screen", "Whiteboard", "Wi-Fi"]}
+            desc="A compact space suitable for small group discussions"
+          />
+
+          <RoomCard
+            id="breakout-room"
+            roomName="Breakout Room"
+            imgSrc="/breakout_room.jpg"
+            capacity={8}
+            desc="A cozy space ideal for brainstorming sessions with your team"
+            amenities={[
+              "Couch Seating",
+              "Whiteboard",
+              "Wi-Fi",
+              "Coffee Station",
+            ]}
+          />
+
+          <RoomCard
+            id="conference-room"
+            roomName="Conference Room"
+            capacity={10}
+            imgSrc="/conference_room.jpeg"
+            amenities={["TV & Projector", "Whiteboard", "Wi-Fi"]}
+            desc="Small conference room with basic meeting amenities"
+          />
+        </div>
+
+        <p className="text-center text-5xl font-bold my-28">
+          Need a bigger space?
+        </p>
+
+        <div className="grid grid-cols-2 justify-between gap-4 px-60">
+          <RoomCard
+            roomName="Workspace"
+            id="workspace"
+            imgSrc="/workspace.jpg"
+            capacity={20}
+            desc="Medium-sized room equipped for hands-on workshops and activites"
+            amenities={["Workbenches", "Power Outlets", "Projector,", "Wi-Fi"]}
+          />
+
+          <RoomCard
+            id="event-hall"
+            roomName="Event Hall"
+            capacity={50}
+            imgSrc="event_hall.jpeg"
+            desc="A larger event space perfect for presentations and performances"
+            amenities={["Stage", "Sound System", "Wi-Fi", "Lighting"]}
+          />
         </div>
       </div>
     </div>
