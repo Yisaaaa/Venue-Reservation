@@ -1,97 +1,141 @@
-import RoomCard from "@/components/RoomCard";
+import { MdEventAvailable } from "react-icons/md";
+import { useState } from "react";
+import { writeToDb } from "@/services";
+import TimeComboBox from "@/components/TimeComboBox";
+import { useParams, useNavigate } from "react-router-dom";
+import { Booking } from "@/interfaces";
 
-const Reservation = () => {
+const Reservation = ({
+  bookings,
+  setBookings,
+}: {
+  bookings: Booking[];
+  setBookings: Function;
+}) => {
+  const roomId: string = useParams().id ?? "";
+
+  let roomName: string;
+
+  switch (roomId) {
+    case "conference-room":
+      roomName = "Conference Room";
+      break;
+
+    case "meeting-room":
+      roomName = "Meeting Room";
+      break;
+
+    case "breakout-room":
+      roomName = "Breakout Room";
+      break;
+
+    case "workspace":
+      roomName = "Workspace";
+      break;
+
+    case "event-hall":
+      roomName = "Event Hall";
+      break;
+
+    default:
+      roomName = "Idk bruhh";
+  }
+
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    const field = { roomType: roomId, name, date, time };
+    const id = await writeToDb(field);
+    setBookings([{ ...field, id }, ...bookings]);
+    setLoading(false);
+    // navigate to home
+    navigate("/");
+  };
+
   return (
-    <div>
-      <div className="bg-[#e6fcf5]">
-        <div className="max-w-screen-lg m-auto pt-16 pb-24">
-          <div className="w-[60%] m-auto mb-16">
-            <p className="font-bold text-7xl drop-shadow-md mb-2 leading-tight text-center">
-              <a
-                href="#rooms"
-                className="text-dark-primary hover:cursor-pointer hover:text-[#05503A] transition-all duration-150 hover:drop-shadow-2xl block"
-              >
-                {"> Reserve <"}
-              </a>{" "}
-              <span>Your Room</span>
-            </p>
-
-            <p className="text-base font-medium leading-relaxed mb-6 text-center">
-              Looking for the ideal space to gather, connect, or celebrate? Our
-              meeting and event rooms offer flexibility, style, and everything
-              you need to create a seamless experience
-            </p>
+    <div className="">
+      <div className="max-w-xl m-auto flex flex-col items-center">
+        <div className="p-4 rounded-full bg-[#EDE7FA] mt-20 mb-10">
+          <div className="p-2 rounded-full bg-[#E4DBF7]">
+            <MdEventAvailable className="text-4xl text-[#7446D6]" />
           </div>
-
-          <img
-            className="w-[80%] m-auto"
-            src="/hero.png"
-            alt="Collage image of different rooms"
-          />
         </div>
-      </div>
+        <h1 className="text-3xl font-medium mb-6">Fill up the details</h1>
+        <div>
+          <p className="text-gray-500 text-lg mb-8">
+            Just a few paces away to reserve your room
+          </p>
 
-      <div className="max-w-screen-lg m-auto py-16">
-        <p id="rooms" className="text-center text-5xl font-bold mb-28">
-          In One Easy Step!
-        </p>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col">
+              <label className="font-medium text-gray-600 text-sm">
+                Room Type
+              </label>
+              <p className="text-lg">{roomName}</p>
+            </div>
 
-        <div className="grid grid-cols-3 justify-between gap-4 px-20">
-          <RoomCard
-            id="meeting-room"
-            roomName="Meeting Room"
-            capacity={5}
-            imgSrc="/meeting_room.jpeg"
-            amenities={["TV Screen", "Whiteboard", "Wi-Fi"]}
-            desc="A compact space suitable for small group discussions"
-          />
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="name"
+                className="font-medium text-gray-600 text-sm"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                placeholder="John Doe"
+                onChange={(e) => setName(e.target.value)}
+                className="border-gray-200 border-2 rounded-md p-2 mb-3"
+              />
+            </div>
 
-          <RoomCard
-            id="breakout-room"
-            roomName="Breakout Room"
-            imgSrc="/breakout_room.jpg"
-            capacity={8}
-            desc="A cozy space ideal for brainstorming sessions with your team"
-            amenities={[
-              "Couch Seating",
-              "Whiteboard",
-              "Wi-Fi",
-              "Coffee Station",
-            ]}
-          />
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="name"
+                className="font-medium text-gray-600 text-sm"
+              >
+                Date
+              </label>
+              <input
+                id="name"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="border-gray-200 border-2 rounded-md p-2 mb-3"
+              />
+            </div>
 
-          <RoomCard
-            id="conference-room"
-            roomName="Conference Room"
-            capacity={10}
-            imgSrc="/conference_room.jpeg"
-            amenities={["TV & Projector", "Whiteboard", "Wi-Fi"]}
-            desc="Small conference room with basic meeting amenities"
-          />
-        </div>
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="time"
+                className="font-medium text-gray-600 text-sm"
+              >
+                Date
+              </label>
+              <TimeComboBox
+                value={time}
+                setValue={setTime}
+                roomType={roomId}
+                date={date}
+              />
+            </div>
 
-        <p className="text-center text-5xl font-bold my-28">
-          Need a bigger space?
-        </p>
-
-        <div className="grid grid-cols-2 justify-between gap-4 px-60">
-          <RoomCard
-            roomName="Workspace"
-            id="workspace"
-            imgSrc="/workspace.jpg"
-            capacity={20}
-            desc="Medium-sized room equipped for hands-on workshops and activites"
-            amenities={["Workbenches", "Power Outlets", "Projector,", "Wi-Fi"]}
-          />
-
-          <RoomCard
-            id="event-hall"
-            roomName="Event Hall"
-            capacity={50}
-            imgSrc="event_hall.jpeg"
-            desc="A larger event space perfect for presentations and performances"
-            amenities={["Stage", "Sound System", "Wi-Fi", "Lighting"]}
-          />
+            <button
+              onClick={handleSubmit}
+              className="py-2 bg-[#7F56DA] hover:bg-[#5427B3] cursor-pointer rounded-lg text-white font-semibold text-xl mt-10"
+              disabled={loading}
+            >
+              Confirm
+            </button>
+          </div>
         </div>
       </div>
     </div>

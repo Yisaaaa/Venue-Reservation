@@ -17,8 +17,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Status } from "./PriorityComboBox";
-import { PaymentInfo } from "./PaymentInfoComboBox";
 
 export function ComboBox({
   value,
@@ -29,7 +27,7 @@ export function ComboBox({
   value: string;
   setValue: Function;
   name: string;
-  items: Status[] | PaymentInfo[];
+  items: string[];
 }) {
   const [open, setOpen] = useState(false);
 
@@ -42,9 +40,7 @@ export function ComboBox({
           className="w-[200px] flex justify-between items-center"
         >
           <span>
-            {value
-              ? items.find((item) => item.value === value)?.label
-              : `Select ${name}...`}
+            {value ? items.find((item) => item === value) : `Select ${name}...`}
           </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </button>
@@ -57,8 +53,8 @@ export function ComboBox({
             <CommandGroup>
               {items.map((item) => (
                 <CommandItem
-                  key={item.value}
-                  value={item.value}
+                  key={item}
+                  value={item}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
@@ -67,10 +63,10 @@ export function ComboBox({
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === item.value ? "opacity-100" : "opacity-0"
+                      value === item ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {item.label}
+                  {item}
                 </CommandItem>
               ))}
             </CommandGroup>
