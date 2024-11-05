@@ -22,12 +22,12 @@ const Bookings = ({ bookings }: { bookings: Booking[] }) => {
   let hasFilter = false;
 
   if (roomTypeFilter != "") {
-    if (filteredBooking.length != 0) {
-      filteredBooking = filteredBooking.filter(
+    if (filteredBooking.length == 0 && !hasFilter) {
+      filteredBooking = bookings.filter(
         (booking) => booking.roomType == roomTypeFilter
       );
     } else {
-      filteredBooking = bookings.filter(
+      filteredBooking = filteredBooking.filter(
         (booking) => booking.roomType == roomTypeFilter
       );
     }
@@ -36,12 +36,12 @@ const Bookings = ({ bookings }: { bookings: Booking[] }) => {
   }
 
   if (dateFilter != "") {
-    if (filteredBooking.length != 0) {
-      filteredBooking = filteredBooking.filter(
+    if (filteredBooking.length == 0 && !hasFilter) {
+      filteredBooking = bookings.filter(
         (booking) => booking.date == dateFilter
       );
     } else {
-      filteredBooking = bookings.filter(
+      filteredBooking = filteredBooking.filter(
         (booking) => booking.date == dateFilter
       );
     }
@@ -50,12 +50,12 @@ const Bookings = ({ bookings }: { bookings: Booking[] }) => {
   }
 
   if (timeFilter != "") {
-    if (filteredBooking.length != 0) {
-      filteredBooking = filteredBooking.filter(
+    if (filteredBooking.length == 0 && !hasFilter) {
+      filteredBooking = bookings.filter(
         (booking) => booking.time == timeFilter
       );
     } else {
-      filteredBooking = bookings.filter(
+      filteredBooking = filteredBooking.filter(
         (booking) => booking.time == timeFilter
       );
     }

@@ -133,7 +133,7 @@ const Reservation = ({
               className="py-2 bg-[#7F56DA] hover:bg-[#5427B3] cursor-pointer rounded-lg text-white font-semibold text-xl mt-10"
               disabled={loading}
             >
-              Confirm
+              {loading ? "Please wait..." : "Confirm"}
             </button>
           </div>
         </div>
